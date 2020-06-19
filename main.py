@@ -1,10 +1,11 @@
 # It will simply loop for each thread, request the api an url with code and with the raw of the Website, we can handle what we do next :
+
 # Changing proxy if SSL Error or Getting Rate Limited
 # Generating a new key and requesting again if don't get any error but code isn't valid
 # Storing in nitros.txt if you get a sweet Nitro Gift !
 
 # Imports
-import requests, string, random, threading, OpenSSL, json, ctypes, os
+import requests, string, random, threading, ssl, json, ctypes, os
 
 # Setting up
 kernel32 = ctypes.windll.kernel32
@@ -110,7 +111,7 @@ def checkKey(key, threadName): # Get the API 'cause it's easier ;)
                 changeProxy(threadName)
                 retriesForThread[threadName] = 0
             continue
-        except OpenSSL.SSL.Error:
+        except ssl.SSL.Error:
             print('[-] SSL error : retrying.')
             retriesForThread[threadName] = retriesForThread[threadName] + 1
             if retriesForThread[threadName] > 4:
