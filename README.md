@@ -1,3 +1,9 @@
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![GitHub stars](https://img.shields.io/github/stars/Lygaen/Nitro-Brute-Force.svg?style=social&label=Star&maxAge=2592000)](https://github.com/Lygaen/Nitro-Brute-Force)
+[![HitCount](http://hits.dwyl.io/Lygaen/badges.svg)](https://github.com/Lygaen/Nitro-Brute-Force)
+
+
+
 # Nitro-Brute-Force
 Get some sweet Nitro Codes by Bruteforcing them !
 
