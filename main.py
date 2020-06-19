@@ -22,13 +22,44 @@ title = 'Nitros Brute Force - by Lygaen - Total : ' + \
     str(nums['total']) + ' | Nitros : ' + str(nums['hits'])
 ctypes.windll.kernel32.SetConsoleTitleW(title)
 
-# Check for proxies.txt file
-if not os.path.isfile('proxies.txt'):
-    new = open('proxies.txt', 'w')
-    new.close()
-    print("No proxies file found, created file named 'proxies.txt' in this directory.\nFill it with proxies.")
+
+def generate_proxies():
+    print('Generating...')
+    url = 'https://api.proxyscrape.com/?request=getproxies&proxytype=http&timeout=10000&country=all&ssl=all&anonymity=all'
+    r = requests.get(url, allow_redirects=True)
+    open('proxies.txt', 'wb').write(r.content)
+    print('Generated ', len(r.content), ' Proxies')
     os.system('pause')
     quit()
+
+
+# Check for proxies.txt file
+if not os.path.isfile('proxies.txt'):
+
+    print("No proxies file found, ")
+    print(
+        "Would you like to generate the file and some proxies ? [1] Yes, both [2] No, just the file")
+    try:
+        reponse = int(input())
+    except ValueError:
+        print('Not a valid number !')
+        print('Please give a valid reponse : 1 or 2')
+        os.system('pause')
+        quit()
+    if reponse == 1:
+        new = open('proxies.txt', 'w')
+        new.close()
+        generate_proxies()
+    elif reponse == 2:
+        new = open('proxies.txt', 'w')
+        new.close()
+        print('Created the file.')
+        os.system('pause')
+        quit()
+    else:
+        print('Please give a valid reponse : 1 or 2')
+        os.system('pause')
+        quit()
 
 # Create the file nitros.txt that will contains the Sweet Nitros
 if not os.path.isfile('nitros.txt'):
@@ -45,12 +76,34 @@ data = proxiesRaw.read()
 
 # Check if empty
 if len(data) == 0:
-    print('No proxies found. Fill proxies.txt')
+    print(
+        'No proxies found in the proxies.txt file, Would you like to generate some ? [1] Yes [2] No')
+    try:
+        reponse = int(input())
+    except ValueError:
+        print('Not a valid number !')
+        print('Please give a valid reponse : 1 or 2')
+        os.system('pause')
+        quit()
+    if reponse == 1:
+        generate_proxies()
+    elif reponse == 2:
+        new = open('proxies.txt', 'w')
+        new.close()
+        print('Created the file.')
+        os.system('pause')
+        quit()
+    else:
+        print('Please give a valid reponse : 1 or 2')
+        os.system('pause')
+        quit()
     os.system('pause')
     quit()
 
+
 # Split each proxy
 proxies = data.split('\n')
+print('Found ', len(proxies), ' potential proxies !')
 
 # Get Proxy type
 proxyChoice = input(
