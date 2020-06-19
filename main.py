@@ -24,11 +24,11 @@ ctypes.windll.kernel32.SetConsoleTitleW(title)
 
 
 def generate_proxies():
-    print('Generating...')
+    print('Generating HTTP...')
     url = 'https://api.proxyscrape.com/?request=getproxies&proxytype=http&timeout=10000&country=all&ssl=all&anonymity=all'
     r = requests.get(url, allow_redirects=True)
     open('proxies.txt', 'wb').write(r.content)
-    print('Generated ', len(r.content), ' Proxies')
+    print('Generated ', len(r.content), ' HTTP Proxies')
     os.system('pause')
     quit()
 
