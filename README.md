@@ -3,6 +3,16 @@
 [![HitCount](http://hits.dwyl.io/Lygaen/badges.svg)](https://github.com/Lygaen/Nitro-Brute-Force)
 
 
+<details>
+  <summary>:warning: IMPORTANT</summary>
+This is a tool that I provide you. I don't make you force to use i in any way. Use it at your own risk.<br>
+- You might get you're account suspended<br>
+- I'm not responsible of your acts<br>
+- Getting free things is not good<br>
+- You are stealing the nitro of someone that you don't know<br>
+- I didn't use because it's bad to steal from people
+</details>
+
 
 # Nitro-Brute-Force
 Get some sweet Nitro Codes by Bruteforcing them !
