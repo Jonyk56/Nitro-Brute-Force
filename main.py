@@ -9,7 +9,6 @@ import requests
 import string
 import random
 import threading
-import ssl
 import json
 import ctypes
 import os
