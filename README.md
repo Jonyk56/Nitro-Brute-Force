@@ -14,7 +14,7 @@ This is a tool that I provide you. I don't make you force to use i in any way. U
 </details>
 
 
-# Nitro-Brute-Force
+# Nitro Brute Force
 Get some sweet Nitro Codes by Bruteforcing them !
 
 You can get nitros code by bruteforcing requests !
