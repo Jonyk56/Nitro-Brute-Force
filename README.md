@@ -16,7 +16,8 @@ This is a tool that I provide you. I don't make you force to use i in any way. U
 
 # Nitro Brute Force
 Get some sweet Nitro Codes by Bruteforcing them !
-:warning! This is BRUTEFORCE so it will take a lot of time :warning:
+
+:warning: This is BRUTEFORCE so it will take a lot of time :warning:
 
 You can get nitros code by bruteforcing requests !
 Here is the Source code to prouve that it isn't a malware or some kind of trojan.
