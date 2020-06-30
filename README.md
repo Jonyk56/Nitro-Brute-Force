@@ -57,6 +57,14 @@ The API URL that I use is this one :<br>
 https://api.proxyscrape.com/?request=getproxies&proxytype=socks5&timeout=10000&country=all<br>
 </details>
 
+<details>
+  <summary>
+    Virus Total
+  </summary>
+  Here you can check the analysis of Virus Total on the .exe file !
+  https://www.virustotal.com/gui/file/69ee674af9557c52ee748c05f248ecbc4b3d7351d2a31f7ecbb733fe35656170
+</details>
+
 ## For the Future
 - [ ] Make a GUI
 - [ ] Post it on PyPi
