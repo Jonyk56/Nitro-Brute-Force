@@ -2,6 +2,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/Lygaen/Nitro-Brute-Force.svg?style=social&label=Star&maxAge=2592000)](https://github.com/Lygaen/Nitro-Brute-Force)
 [![HitCount](http://hits.dwyl.io/Lygaen/badges.svg)](https://github.com/Lygaen/Nitro-Brute-Force)
 
+# **WANT TO CONTACT ME ? COME ON DISCORD -> Lygaen#7152**
 
 <details>
   <summary>:warning: IMPORTANT</summary>
