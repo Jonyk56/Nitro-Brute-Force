@@ -170,7 +170,7 @@ def checkKey(key, threadName):  # Get the API 'cause it's easier ;)
             body = requests.get(url, proxies={'http': proxyType + proxies[int(proxyForThread[threadName])],
                                               'https': proxyType + proxies[int(proxyForThread[threadName])]},
                                 timeout=timeout).json()
-        except (requests.exceptions.ConnectTimeout, requests.exceptions.ReadTimeout):
+        except (requests.exceptions.ConnectTimeout, requests.exceptions.ReadTimeout): # Checking for all erros possible
             print(bcolors.FAIL +
                   '[-] Connection timed out, changing proxy.')
             changeProxy(threadName)
@@ -214,7 +214,7 @@ def checkKey(key, threadName):  # Get the API 'cause it's easier ;)
     except (KeyError, IndexError):
         response = 'Code Found.'
 
-    if response != 'Unknown Gift Code':
+    if response != 'Unknown Gift Code': # Checking if key is valid
         if response != 'You are being rate limited.':
             saveKey(key, body)
             print('')
@@ -240,7 +240,7 @@ def checkKey(key, threadName):  # Get the API 'cause it's easier ;)
     ctypes.windll.kernel32.SetConsoleTitleW(title)
 
 
-def saveKey(key, json):
+def saveKey(key, json): # Save the key to a file
     try:
         product = json['store_listing']['sku']['name']
     except (KeyError, IndexError):
@@ -252,7 +252,7 @@ def saveKey(key, json):
     hits.close()
 
 
-def main():
+def main(): # The main runner
     for i in range(threads - 1):
         thread = threading.Thread(target=loop, args=('thread' + str(i + 1),))
         thread.daemon = False
@@ -262,7 +262,7 @@ def main():
         checkKey(genKey(), 'thread0')
 
 
-def loop(threadName):
+def loop(threadName): # The loop for checking key etc...
     while True:
         checkKey(genKey(), threadName)
 
