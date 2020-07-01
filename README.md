@@ -38,12 +38,12 @@ And that's it ! Hope you like the Sweet Nitros Code
 
 ## Setup
 
-Here are the line you need to do to make it work properly :
-`git clone https://github.com/Lygaen/Nitro-Brute-Force`
-`cd Nitro-Brute-Force`
+Here are the line you need to do to make it work properly :<br>
+`git clone https://github.com/Lygaen/Nitro-Brute-Force`<br>
+`cd Nitro-Brute-Force`<br>
 `python main.py`
 
-or if you prefer complicated thing, the one line command :
+or if you prefer complicated thing, the one line command :<br>
 `git clone https://github.com/Lygaen/Nitro-Brute-Force & cd Nitro-Brute-Force & python main.py`
 
 ## Infos
